@@ -10,13 +10,19 @@ int yylex(void);
 %token '{' '}' ':' ',' ASPAS STRING '['']' VALOR_NUMERICO
 
 %%
-JSON_VALIDO: {printf("encontrei um JSON VALIDO\n");}
-  JSON JSON_VALIDO
-  |;
+JASON_VALIDO:
+  JSON {printf("VALIDO\n");
+        return 0;
+        }
+  |JSON JASON_VALIDO {printf("VALIDO\n");
+                      return 0;
+                      }
+  ;
 
 JSON:
-  '{' CONTEUDO '}' {printf("encontrei um JSON\n");}
+  '{' CONTEUDO '}'
   ;
+
 CONTEUDO:
   VARIAVEL ':' VALOR
   |CONTEUDO ',' CONTEUDO
@@ -26,7 +32,6 @@ CONTEUDO:
 VARIAVEL:
   ASPAS STRING ASPAS;
 
-
 VALOR:
   VALOR_NUMERICO
   |VARIAVEL
@@ -35,8 +40,8 @@ VALOR:
 
 
 LISTA:
-  |ELEMENTO
-  |ELEMENTO ',' ELEMENTO
+  ELEMENTO
+  |ELEMENTO ',' VALOR
   |;
 
 ELEMENTO:
@@ -46,10 +51,10 @@ ELEMENTO:
 
 void yyerror(char *s) {
   printf("INVALIDO\n");
+  return;
 }
 
 int main() {
   yyparse();
     return 0;
-
 }
