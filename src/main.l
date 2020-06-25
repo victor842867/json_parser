@@ -46,7 +46,7 @@ void yyerror(char *);
 
 [[:space:]]+
 
-. {yyerror("token desconhecido\n");}
+.
 
 %%
 int yywrap() {

@@ -807,7 +807,7 @@ YY_RULE_SETUP
 case 11:
 YY_RULE_SETUP
 #line 49 "src/main.l"
-{yyerror("token desconhecido\n");}
+
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
